@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_modules_helloWorld__WEBPACK_IMPORTED_MODULE_0__["default"])();
+//helloWorld();
 (0,_modules_fillDatalist__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
@@ -92,22 +92,13 @@ __webpack_require__.r(__webpack_exports__);
 
 function fillDataList() {
   var dataLi = document.querySelector('#selectInput');
-  //ajaxService().then((json) => {
-  //for(item of searchArray(json,document.querySelector('input').value)){
-  // let option = document.createElement('option');
-  //console.log(item);
-  //console.log(dataLi);
-  //option = item.name;
-  //dataLi.appendChild(option);
-  //}
-  //})
-  console.log(document.querySelector('input').value);
-  (0,_ajaxService__WEBPACK_IMPORTED_MODULE_0__["default"])().then(function (x) {
-    (0,_searchArray__WEBPACK_IMPORTED_MODULE_1__["default"])(x, document.querySelector('input')).forEach(function (element) {
+  var searchInput = document.querySelector('input').value;
+  (0,_ajaxService__WEBPACK_IMPORTED_MODULE_0__["default"])().then(function (json) {
+    dataLi.innerHTML = '';
+    (0,_searchArray__WEBPACK_IMPORTED_MODULE_1__["default"])(json, searchInput).forEach(function (element) {
       var option = document.createElement('option');
-      console.log(element);
-      console.log(dataLi);
-      option = element.name;
+      option.value = element.name;
+      dataLi.appendChild(option);
     });
   });
 }
@@ -143,10 +134,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function searchArray(arrays, searchCrit) {
+  var search = searchCrit.trim();
   var result = arrays.filter(function (element) {
-    return element.name.includes(searchCrit);
+    return element.name.toLowerCase().startsWith(search.toLowerCase());
   });
-  console.log(result);
   return result;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (searchArray);

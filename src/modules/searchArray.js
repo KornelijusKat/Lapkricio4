@@ -1,6 +1,6 @@
 function searchArray(arrays, searchCrit){
-    let result = arrays.filter(element => element.name.includes(searchCrit))
-    console.log(result);
+    let search = searchCrit.trim();
+    let result = arrays.filter(element => element.name.toLowerCase().startsWith(search.toLowerCase()))
     return result
 }
 export default searchArray;
